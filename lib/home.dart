@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF2F2F2),
-      appBar: AppBar(
+      appBar: (selectedIndex == 0) ? AppBar(
         backgroundColor: const Color(0xffF2F2F2),
         centerTitle: true,
         title: const SearchContainer(),
@@ -39,10 +39,32 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           CircleAvatar(
             backgroundColor: const Color(0xffC4C4C4),
-            child: Image.asset("assets/images/avatar.png", width: 38.46, height: 40,),
+            child: InkWell(
+                child: Image.asset("assets/images/avatar.png", width: 38.46, height: 40,),
+              onTap: () {
+                  setState(() {
+                    selectedIndex = 2;
+                  });
+              },
+            ),
           ),
           const SizedBox(width: 38.46,),
         ],
+      ) : (selectedIndex == 1) ? AppBar(
+        backgroundColor: const Color(0xffF2F2F2),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: const Text("Orders",
+          style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500
+          ),
+        ),
+      ) : AppBar(
+        backgroundColor: const Color(0xffF2F2F2),
+        leading: Container(
+      margin: const EdgeInsets.only(left: 27),
+        child: const Icon(Icons.menu, size: 30,)),
       ),
       body: screens[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
